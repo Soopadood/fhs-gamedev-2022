@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpHeight = 5;
     [SerializeField] private float groundedDist = 1;
     [SerializeField] private float maxVertSpeed = 20;
+    public GameObject landingDust;
     private bool canJump = true;
     [Header("Walljumping")]
     [Tooltip("Distance from side of player")] [SerializeField] private float wallJumpDist = 1f;
@@ -81,6 +82,17 @@ public class PlayerMovement : MonoBehaviour
         if (collision.tag.Equals("Respawn"))
         {
             transform.position = new Vector2(0, 0);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log(collision.ToString());
+        Debug.Log($"collider: {collision.collider.gameObject.layer}, other collider: {collision.otherCollider.gameObject.layer}");
+        if (collision.collider.gameObject.layer.Equals(6))
+        {
+            Instantiate(landingDust, transform.position - new Vector3(0,0.5f,0), Quaternion.identity);
+            Debug.Log("hi");
         }
     }
 
