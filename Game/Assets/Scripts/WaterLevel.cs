@@ -8,13 +8,14 @@ public class WaterLevel : MonoBehaviour
     public float waterAmount = 100;
     public float dryingRate = 1;
     public float iFrameTime = 3f;
+    public bool isInvincible = false; //I-frames
     [SerializeField] Slider healthBarSlider;
     [SerializeField] Image indicatorUi;
     [SerializeField] List<Sprite> dropletSprites;
     [SerializeField] ParticleSystem splashParticles;
+    [SerializeField] GameObject spriteRenderer;
     private float maxWaterAmount;
     private bool isInLake = false;
-    private bool isInvincible = false; //I-frames
 
     private void Start()
     {
@@ -37,6 +38,15 @@ public class WaterLevel : MonoBehaviour
             if (waterAmount > 100) //can't add more than 100% water level
                 waterAmount = 100;
         }
+        if (isInvincible)
+        {
+            if (spriteRenderer.activeSelf)
+                spriteRenderer.SetActive(false);
+            else
+                spriteRenderer.SetActive(true);
+        }
+        if (!isInvincible)
+            spriteRenderer.SetActive(true);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
