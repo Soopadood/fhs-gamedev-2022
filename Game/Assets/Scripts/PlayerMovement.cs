@@ -39,11 +39,13 @@ public class PlayerMovement : MonoBehaviour
 
 
     [SerializeField] private Transform camera;
+    public PlayerAnimation playerAnimation;
     void Start()
     {
         groundLayer = (int)Mathf.Log(ground, 2);
         rigidBody = GetComponent<Rigidbody2D>();
         waterLevel = GetComponent<WaterLevel>();
+        playerAnimation = GetComponent<PlayerAnimation>();
         //runSpeed = baseRunSpeed;
     }
 
@@ -61,7 +63,19 @@ public class PlayerMovement : MonoBehaviour
 
         //set velocity of rigidbody based on horizontal input, add the wall jump momentum, clamp the vertical speed for falling and wall accelerating upward
         rigidBody.velocity = new Vector2((runSpeed * Input.GetAxisRaw("Horizontal")) + wallJumpSideDistNow, Mathf.Clamp(rigidBody.velocity.y, -maxVertSpeed, maxVertSpeed));
-    }                                                                                                                                                                       
+        Animation();
+
+    }
+
+    private void Animation()
+    {
+        if (!isGrounded)
+            playerAnimation.state = PlayerAnimation.animationState.falling;
+        else if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0.1f)
+            playerAnimation.state = PlayerAnimation.animationState.running;
+        else
+            playerAnimation.state = PlayerAnimation.animationState.idle;
+    }
 
     private void GroundJump()
     {

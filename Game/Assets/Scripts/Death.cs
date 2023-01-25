@@ -10,6 +10,7 @@ public class Death : MonoBehaviour
     [SerializeField] GameObject DeathScreen;
     [SerializeField] TextMeshProUGUI DeathTextUI;
     [SerializeField] string[] DeathTextList;
+    public GameObject checkpoint;
 
     void Start()
     {
@@ -25,11 +26,12 @@ public class Death : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.E) && DeathScreen.activeSelf)
         {
-            transform.position = new Vector2(0, 0);
+            transform.position = checkpoint.transform.position;
             DeathScreen.SetActive(false);
             DeathTextUI.text = DeathTextList[ Random.Range(0, DeathTextList.Length)];
             Time.timeScale = 1;
             waterLevel.waterAmount = 100;
+            waterLevel.isInvincible = false;
         }
     }
 }

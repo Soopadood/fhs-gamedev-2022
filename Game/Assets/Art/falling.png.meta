@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5911d50a18c39e44895bb06af4f87839
+guid: 82a5c4d56739caa40a55040fbdfb137c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 200
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -103,9 +103,9 @@ TextureImporter:
   - serializedVersion: 3
     buildTarget: WebGL
     maxTextureSize: 2048
-    resizeAlgorithm: 1
+    resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -115,9 +115,9 @@ TextureImporter:
   - serializedVersion: 3
     buildTarget: Windows Store Apps
     maxTextureSize: 2048
-    resizeAlgorithm: 1
+    resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -128,13 +128,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bop2_0
+      name: falling_0
       rect:
         serializedVersion: 2
-        x: 18
-        y: 214
-        width: 26
-        height: 25
+        x: 0
+        y: 12
+        width: 62
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -142,20 +142,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 54597cea9f5177f42b8fea0985564fc7
-      internalID: 1082126202
+      spriteID: 5c606d224fcb0ea439fb3e9055a7f870
+      internalID: -26386641
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bop2_1
+      name: falling_1
       rect:
         serializedVersion: 2
-        x: 17
-        y: 150
-        width: 28
-        height: 24
+        x: 64
+        y: 12
+        width: 62
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -163,20 +163,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f3bf6e93e0438c84280cafccec7b748e
-      internalID: 791769745
+      spriteID: 8721715aa6e6f5f4a9944ab5e7d4ce9e
+      internalID: -1927334290
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bop2_2
+      name: falling_2
       rect:
         serializedVersion: 2
-        x: 17
-        y: 86
-        width: 28
-        height: 23
+        x: 128
+        y: 12
+        width: 62
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -184,20 +184,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5164795a27e11934898af984398ecbd8
-      internalID: 1934124544
+      spriteID: 02dbcc346e071ef418d9aeb35f73955c
+      internalID: -1276687946
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bop2_3
+      name: falling_3
       rect:
         serializedVersion: 2
-        x: 17
-        y: 22
-        width: 28
-        height: 24
+        x: 192
+        y: 12
+        width: 62
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -205,8 +205,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8bc026a9fad336846b3b23c4b5ab1673
-      internalID: 742661954
+      spriteID: c90e8cf65568dbc4ab6bb1179a10e703
+      internalID: 1653884922
       vertices: []
       indices: 
       edges: []
@@ -222,10 +222,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      bop2_1: 791769745
-      bop2_3: 742661954
-      bop2_0: 1082126202
-      bop2_2: 1934124544
+      falling_3: 1653884922
+      falling_2: -1276687946
+      falling_0: -26386641
+      falling_1: -1927334290
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
