@@ -3,59 +3,66 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour {
-    [SerializeField] private List<Sprite> idleSprites;
-    [SerializeField] private List<Sprite> runningSprites;
-    [SerializeField] private List<Sprite> fallingSprites;
-    private int idleNum;
-    [SerializeField] private SpriteRenderer rend;
-    private Rigidbody2D rigidBody;
+    [SerializeField] private List<Sprite> _idleSprites;
+    [SerializeField] private List<Sprite> _runningSprites;
+    [SerializeField] private List<Sprite> _fallingSprites;
+    private int _idleNum;
+    private SpriteRenderer _renderer;
+    private Rigidbody2D _rigidBody;
 
-    [SerializeField] private float period = 1f;
-    private float lastChanged;
+    [SerializeField] private float _period = 1f;
+    private float _lastChanged;
 
-    public animationState state = animationState.idle;
-    public enum animationState {
-        idle,
-        running,
-        falling,
-    }
+    public AnimationState _state = AnimationState.Idle;
 
     private void Start()
     {
-        rigidBody = GetComponent<Rigidbody2D>();
+        _rigidBody = GetComponent<Rigidbody2D>();
+        _renderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
-        if (state == animationState.idle)
-            SwitchSprites(idleSprites);
-        if (state == animationState.running)
-            SwitchSprites(runningSprites);
-        if (state == animationState.falling)
-            SwitchSprites(fallingSprites);
-
-        if (rigidBody.velocity.x > 0)//simple flip sprite based on velocity(to make it look the direction of movement)
-            rend.flipX = false;
-        else if (rigidBody.velocity.x < 0)
-            rend.flipX = true;
+        switch (_state)
+        {
+            case AnimationState.Idle:
+                SwitchSprites(_idleSprites);
+                break;
+            case AnimationState.Running:
+                SwitchSprites(_runningSprites);
+                break;
+            case AnimationState.Falling:
+                SwitchSprites(_fallingSprites);
+                break;
+        }
+        _renderer.flipX = (_rigidBody.velocity.x < 0);
+        //simple flip sprite based on velocity(to make it look the direction of movement)
     }
 
     private void SwitchSprites(List<Sprite> spriteList)
     {
-        if ((Time.time - lastChanged) >= period)
+        if ((Time.time - _lastChanged) >= _period)
         {
-            if (idleNum < spriteList.Count)
+            if (_idleNum < spriteList.Count)
             {
-                rend.sprite = spriteList[idleNum];
-                idleNum++;
+                _renderer.sprite = spriteList[_idleNum];
+                _idleNum++;
             }
-            else if (idleNum >= spriteList.Count)
+            else if (_idleNum >= spriteList.Count)
             {
-                idleNum = 0;
-                rend.sprite = spriteList[idleNum];
+                _idleNum = 0;
+                _renderer.sprite = spriteList[_idleNum];
             }
 
-            lastChanged = Time.time;
+            _lastChanged = Time.time;
         }
     }
+}
+
+[System.Serializable]
+public enum AnimationState
+{
+    Idle,
+    Running,
+    Falling,
 }

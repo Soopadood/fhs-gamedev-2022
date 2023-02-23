@@ -3155,24 +3155,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37b353249bf8e7e4fb1efb5db0e9ceea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idleSprites:
+  _idleSprites:
   - {fileID: 1082126202, guid: 5911d50a18c39e44895bb06af4f87839, type: 3}
   - {fileID: 791769745, guid: 5911d50a18c39e44895bb06af4f87839, type: 3}
   - {fileID: 1934124544, guid: 5911d50a18c39e44895bb06af4f87839, type: 3}
   - {fileID: 742661954, guid: 5911d50a18c39e44895bb06af4f87839, type: 3}
-  runningSprites:
+  _runningSprites:
   - {fileID: 771201895, guid: 43f0febc31447c24c9fcebed6eede2ee, type: 3}
   - {fileID: 419470702, guid: 43f0febc31447c24c9fcebed6eede2ee, type: 3}
-  - {fileID: 1183141494, guid: 43f0febc31447c24c9fcebed6eede2ee, type: 3}
   - {fileID: -2011534982, guid: 43f0febc31447c24c9fcebed6eede2ee, type: 3}
-  fallingSprites:
+  - {fileID: 1183141494, guid: 43f0febc31447c24c9fcebed6eede2ee, type: 3}
+  _fallingSprites:
   - {fileID: -26386641, guid: 82a5c4d56739caa40a55040fbdfb137c, type: 3}
   - {fileID: -1927334290, guid: 82a5c4d56739caa40a55040fbdfb137c, type: 3}
   - {fileID: -1276687946, guid: 82a5c4d56739caa40a55040fbdfb137c, type: 3}
   - {fileID: 1653884922, guid: 82a5c4d56739caa40a55040fbdfb137c, type: 3}
-  rend: {fileID: 1563375251}
-  period: 0.1
-  state: 0
+  _period: 0.2
+  _state: 0
 --- !u!114 &1210756882
 MonoBehaviour:
   m_ObjectHideFlags: 0
