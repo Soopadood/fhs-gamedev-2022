@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAnimation : MonoBehaviour {
+public class PlayerAnimation : MonoBehaviour
+{
     [SerializeField] private List<Sprite> _idleSprites;
     [SerializeField] private List<Sprite> _runningSprites;
     [SerializeField] private List<Sprite> _fallingSprites;
