@@ -19,7 +19,7 @@ public class Death : MonoBehaviour
 
     void Update()
     {
-       if (waterLevel.waterAmount <= 0)
+       if (waterLevel.WaterAmount <= 0)
         {
             DeathScreen.SetActive(true);
             Time.timeScale = 0;
@@ -30,8 +30,8 @@ public class Death : MonoBehaviour
             DeathScreen.SetActive(false);
             DeathTextUI.text = DeathTextList[ Random.Range(0, DeathTextList.Length)];
             Time.timeScale = 1;
-            waterLevel.waterAmount = 100;
-            waterLevel.isInvincible = false;
+            waterLevel.WaterAmount = 100;
+            waterLevel.IsInvincible = false;
         }
     }
 }

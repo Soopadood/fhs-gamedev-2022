@@ -70,11 +70,11 @@ public class PlayerMovement : MonoBehaviour
     private void Animation()
     {
         if (!isGrounded)
-            playerAnimation.state = PlayerAnimation.animationState.falling;
+            playerAnimation._state = AnimationState.Falling;
         else if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0.1f)
-            playerAnimation.state = PlayerAnimation.animationState.running;
+            playerAnimation._state = AnimationState.Running;
         else
-            playerAnimation.state = PlayerAnimation.animationState.idle;
+            playerAnimation._state = AnimationState.Idle;
     }
 
     private void GroundJump()
