@@ -27,6 +27,7 @@ public class WaterLevel : MonoBehaviour
 
     private void Update()
     {
+        Mathf.Clamp(_waterAmount, 0, 100); //0 is the min, right?
         if (_waterAmount >= 0)
             _waterAmount -= _dryingRate * Time.deltaTime; //Decrease water level by drying rate
         _healthBarSlider.value = _waterAmount / _maxWaterAmount;
@@ -37,7 +38,6 @@ public class WaterLevel : MonoBehaviour
         if (_isInLake)
             _waterAmount += Time.deltaTime * 30f;
 
-        Mathf.Clamp(_waterAmount, 0, 100); //0 is the min, right?
         _spriteRenderer.SetActive(!(_isInvincible && _spriteRenderer.activeSelf));
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -47,7 +47,6 @@ public class WaterLevel : MonoBehaviour
             WaterDroplet dropletScript = collision.GetComponentInParent<WaterDroplet>();
             _waterAmount += dropletScript.fillAmount;//increse water level by droplet's fillamount
             collision.gameObject.SetActive(false); //set just FX and collider of droplet inactive(not parent w/ script_
-            Mathf.Clamp(_waterAmount, 0, 100);
         }
         if (collision.GetComponent<Lake>() != null)
             _isInLake = true;
