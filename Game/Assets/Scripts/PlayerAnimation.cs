@@ -14,7 +14,8 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] private float _period = 1f;
     private float _lastChanged;
 
-    public AnimationState _state = AnimationState.Idle;
+    [SerializeField] private AnimationState _state = AnimationState.Idle;
+    [HideInInspector] public AnimationState State { get { return _state; } set { _state = value; } }
 
     private void Start()
     {
@@ -36,7 +37,7 @@ public class PlayerAnimation : MonoBehaviour
                 SwitchSprites(_fallingSprites);
                 break;
         }
-        _renderer.flipX = (_rigidBody.velocity.x < 0);
+        if (Input.GetAxis("Horizontal") != 0) _renderer.flipX = (_rigidBody.velocity.x < 0);
         //simple flip sprite based on velocity(to make it look the direction of movement)
     }
 
