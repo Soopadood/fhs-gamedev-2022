@@ -7,46 +7,43 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Walking")]
-    [SerializeField] private float runSpeed = 5;
+    [SerializeField] private float _runSpeed = 5;
     //[SerializeField] private float baseRunSpeed = 3;
     //[SerializeField] private float sprintSpeedMultiplier = 2f;
 
     [Header("Dashing")]
-    private bool canDash = false;
-    private bool isDashing;
-    [SerializeField] private float dashPowerMultiplier = 1f;
-    [SerializeField] private float dashingTime = 0.3f;
-    //private float dashingCooldown = 1f;
-    [SerializeField] TrailRenderer dashTrail;
+    private bool _canDash = false;
+    [SerializeField] private float _dashPowerMultiplier = 1f;
+    [SerializeField] private float _dashingTime = 0.3f;
+    //private float _dashingCooldown = 1f;
+    [SerializeField] TrailRenderer _dashTrail;
 
     [Header("Jumping")]
-    [SerializeField] private float jumpHeight = 5;
-    [SerializeField] private float groundedDist = 1;
-    [SerializeField] private float maxVertSpeed = 20;
-    private bool canJump = true;
-    private bool isGrounded = false;
+    [SerializeField] private float _jumpHeight = 5;
+    [SerializeField] private float _groundedDist = 1;
+    [SerializeField] private float _maxVertSpeed = 20;
+    private bool _canJump = true;
+    private bool _isGrounded = false;
     [Header("Walljumping")]
-    [Tooltip("Distance from side of player")] [SerializeField] private float wallJumpDist = 1f;
-    [Tooltip("Side power of walljump")][SerializeField] private float wallJumpDistSide = 2f;
-    private float wallJumpSideDistNow = 0f;
-    private float sidewaysMomentum = 1f;
-    private float wallJumpTime;
+    [Tooltip("Distance from side of player")] [SerializeField] private float _wallJumpDist = 1f;
+    [Tooltip("Side power of walljump")][SerializeField] private float _wallJumpDistSide = 2f;
+    private float _wallJumpSideDistNow = 0f;
+    private float _wallJumpTime;
     [Header("Collision")]
-    [Tooltip("Editor ground layer")][SerializeField] private LayerMask ground;
-    private int groundLayer; // log base 2 of ground (^) actually used
-    private Rigidbody2D rigidBody;
-    private WaterLevel waterLevel;
+    [Tooltip("Editor ground layer")][SerializeField] private LayerMask _ground;
+    private int _groundLayer; // log base 2 of ground (^) actually used
+    private Rigidbody2D _rigidBody;
+    private WaterLevel _waterLevel;
 
 
-    [SerializeField] private Transform camera;
-    public PlayerAnimation playerAnimation;
+    [SerializeField] private Transform _camera;
+    [SerializeField] private PlayerAnimation _playerAnimation;
     void Start()
     {
-        groundLayer = (int)Mathf.Log(ground, 2);
-        rigidBody = GetComponent<Rigidbody2D>();
-        waterLevel = GetComponent<WaterLevel>();
-        playerAnimation = GetComponent<PlayerAnimation>();
-        //runSpeed = baseRunSpeed;
+        _groundLayer = (int)Mathf.Log(_ground, 2);
+        _rigidBody = GetComponent<Rigidbody2D>();
+        _waterLevel = GetComponent<WaterLevel>();
+        _playerAnimation = GetComponent<PlayerAnimation>();
     }
 
     void Update()
@@ -63,94 +60,93 @@ public class PlayerMovement : MonoBehaviour
         //runSpeed = baseRunSpeed * (Input.GetKey(KeyCode.LeftShift) ? sprintSpeedMultiplier : 1);
 
         // Dashing
-        
+        if (Input.GetKey(KeyCode.LeftShift) && _canDash)
+            StartCoroutine(Dash());
 
         //set velocity of rigidbody based on horizontal input, add the wall jump momentum, clamp the vertical speed for falling and wall accelerating upward
-        rigidBody.velocity = new Vector2((runSpeed * Input.GetAxisRaw("Horizontal")) + wallJumpSideDistNow, Mathf.Clamp(rigidBody.velocity.y, -maxVertSpeed, maxVertSpeed));
+        _rigidBody.velocity = new Vector2((_runSpeed * Input.GetAxisRaw("Horizontal")) + _wallJumpSideDistNow, Mathf.Clamp(_rigidBody.velocity.y, -_maxVertSpeed, _maxVertSpeed));
         Animation();
 
     }
 
     private void Animation()
     {
-        if (!isGrounded)
-            playerAnimation.state = PlayerAnimation.animationState.falling;
-        else if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0.1f)
-            playerAnimation.state = PlayerAnimation.animationState.running;
-        else
-            playerAnimation.state = PlayerAnimation.animationState.idle;
+        if (!_isGrounded)
+            _playerAnimation.State = AnimationState.Falling;
+        else _playerAnimation.State = (Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0.1f) ? AnimationState.Running : AnimationState.Idle;
     }
 
     private void GroundJump()
     {
-        
-        //Debug.Log($"Canjump: {canJump} Raycast: {groundedRaycast.collider != null}");
-        if (((Input.GetButtonDown("Vertical") && Input.GetAxisRaw("Vertical") > 0) || Input.GetKeyDown(KeyCode.Space)) && isGrounded && canJump == true) //if vertical input, is grounded, and doesn't have jump cooldown
+        RaycastHit2D groundedRaycast = Physics2D.Raycast(transform.position, -Vector2.up, _groundedDist);//grounded raycast to detect if on the ground
+        _isGrounded = groundedRaycast.collider != null;
+
+        if (((Input.GetButtonDown("Vertical") && Input.GetAxisRaw("Vertical") > 0) || Input.GetKeyDown(KeyCode.Space)) && _isGrounded && _canJump == true) //if vertical input, is grounded, and doesn't have jump cooldown
         {
             canDash = true;
             StartCoroutine(JumpDelay());//Small cooldown for jump
-            rigidBody.velocity += Vector2.up * jumpHeight;
+            _rigidBody.velocity += Vector2.up * _jumpHeight;
             // camera.GetComponent<CameraShake>().cameraShake();
         }
     }
 
     private void WallJump()
     {
-        RaycastHit2D left = Physics2D.Raycast(transform.position, Vector2.left, wallJumpDist, ground);
-        RaycastHit2D right = Physics2D.Raycast(transform.position, Vector2.right, wallJumpDist, ground);
+        var left = Physics2D.Raycast(transform.position, Vector2.left, _wallJumpDist, _ground);
+        var right = Physics2D.Raycast(transform.position, Vector2.right, _wallJumpDist, _ground);
 
-        if ((left.collider != null || right.collider != null) && /*Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0 &&*/ (Input.GetButtonDown("Vertical") || Input.GetKeyDown(KeyCode.Space)) && canJump)
+        if ((left.collider != null || right.collider != null) && /*Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0 &&*/ (Input.GetButtonDown("Vertical") || Input.GetKeyDown(KeyCode.Space)) && _canJump)
         {
             StartCoroutine(JumpDelay());
             //rigidBody.velocity = new Vector2(rigidBody.velocity.x, 0); //
-            rigidBody.velocity = Vector2.up * jumpHeight;
-            wallJumpSideDistNow = left.collider != null ? (wallJumpDistSide) : (wallJumpDistSide * -1);
-            wallJumpTime = Time.time;
+            _rigidBody.velocity = Vector2.up * _jumpHeight;
+            _wallJumpSideDistNow = left.collider != null ? (_wallJumpDistSide) : (_wallJumpDistSide * -1);
+            _wallJumpTime = Time.time;
             //Debug.Log(wallJumpSideDistNow);
         }
 
-        float sidePower = Mathf.Exp(-4 * (Time.time - wallJumpTime));
+        float sidePower = Mathf.Exp(-4 * (Time.time - _wallJumpTime));
         if (sidePower < 0.2)
             sidePower = 0;
-        if (isGrounded) //TODO make this fix better for jumping up the same wall instead of back and forth between two
+        if (_isGrounded) //TODO make this fix better for jumping up the same wall instead of back and forth between two
             sidePower = 0;
-        if (wallJumpSideDistNow > 0)
-            wallJumpSideDistNow = wallJumpDistSide * sidePower;
-        if (wallJumpSideDistNow < 0)
-            wallJumpSideDistNow = wallJumpDistSide * sidePower * -1;
+        if (_wallJumpSideDistNow > 0)
+            _wallJumpSideDistNow = _wallJumpDistSide * sidePower;
+        if (_wallJumpSideDistNow < 0)
+            _wallJumpSideDistNow = _wallJumpDistSide * sidePower * -1;
     }
 
     IEnumerator Dash()//sets gravity to 0, turns on dash trail, adds horizontal velocity in the same way as wall jump
     {
-        canDash = false;
-        isDashing = true;
-        float originalGravity = rigidBody.gravityScale;
-        rigidBody.gravityScale = 0f;
-        rigidBody.velocity = new Vector2(rigidBody.velocity.x, 0);
-        wallJumpSideDistNow = rigidBody.velocity.x > 0 ? (wallJumpDistSide) * dashPowerMultiplier : (dashPowerMultiplier * wallJumpDistSide * -1);
-        wallJumpTime = Time.time;
-        dashTrail.emitting = true;
-        yield return new WaitForSeconds(dashingTime);
-        dashTrail.emitting = false;
-        rigidBody.gravityScale = originalGravity;
-        isDashing = false;
-        //yield return new WaitForSeconds(dashingCooldown);
-        //canDash = true;
+        _canDash = false;
+        
+        float originalGravity = _rigidBody.gravityScale;
+        _rigidBody.gravityScale = 0f;
+        _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, 0);
+        _wallJumpSideDistNow = _rigidBody.velocity.x > 0 ? (_wallJumpDistSide) * _dashPowerMultiplier : (_dashPowerMultiplier * _wallJumpDistSide * -1);
+        _wallJumpTime = Time.time;
+        _dashTrail.emitting = true;
+        yield return new WaitForSeconds(_dashingTime);
+        _dashTrail.emitting = false;
+        _rigidBody.gravityScale = originalGravity;
+
+        yield return new WaitForSeconds(_dashingCooldown);
+        _canDash = true;
     }
 
-    IEnumerator JumpDelay()//small cooldown for jump
+    IEnumerator JumpDelay() //small cooldown for jump
     {
-        canJump = false;
+        _canJump = false;
         yield return new WaitForSeconds(0.1f);
-        canJump = true;
+        _canJump = true;
     }
 
     private void OnDrawGizmosSelected()
     {
         //Gizmos.DrawWireSphere(transform.position, wallJumpDist);
         //Gizmos.DrawWireSphere(transform.position, jumpDistance); 
-        Gizmos.DrawLine(transform.position, new Vector2(transform.position.x + wallJumpDist, transform.position.y)); //I've never done gizmos before but I made them
-        Gizmos.DrawLine(transform.position, new Vector2(transform.position.x - wallJumpDist, transform.position.y)); //lines instead of circles I thought it might be good
-        Gizmos.DrawLine(transform.position, -Vector2.up * groundedDist);
+        Gizmos.DrawLine(transform.position, new Vector2(transform.position.x + _wallJumpDist, transform.position.y)); //I've never done gizmos before but I made them
+        Gizmos.DrawLine(transform.position, new Vector2(transform.position.x - _wallJumpDist, transform.position.y)); //lines instead of circles I thought it might be good
+        Gizmos.DrawLine(transform.position, -Vector2.up * _groundedDist);
     }
 }

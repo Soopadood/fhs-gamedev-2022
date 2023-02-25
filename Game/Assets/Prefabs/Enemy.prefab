@@ -298,14 +298,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37b353249bf8e7e4fb1efb5db0e9ceea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idleSprites:
+  _idleSprites:
   - {fileID: 1865057332, guid: 0740210f9e0ac7a4b9b09d84226e69ae, type: 3}
   - {fileID: -1130991556, guid: 0740210f9e0ac7a4b9b09d84226e69ae, type: 3}
   - {fileID: -239168682, guid: 0740210f9e0ac7a4b9b09d84226e69ae, type: 3}
   - {fileID: -1571763737, guid: 0740210f9e0ac7a4b9b09d84226e69ae, type: 3}
   - {fileID: -1247235891, guid: 0740210f9e0ac7a4b9b09d84226e69ae, type: 3}
-  rend: {fileID: 4747049014347967651}
-  period: 0.1
+  _runningSprites: []
+  _fallingSprites: []
+  _period: 1
+  _state: 0
 --- !u!1 &142537094631283865
 GameObject:
   m_ObjectHideFlags: 0
