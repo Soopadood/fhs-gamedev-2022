@@ -12,10 +12,10 @@ public class PlayerMovement : MonoBehaviour
     //[SerializeField] private float sprintSpeedMultiplier = 2f;
 
     [Header("Dashing")]
-    private bool _canDash = true;
+    private bool _canDash = false;
     [SerializeField] private float _dashPowerMultiplier = 1f;
     [SerializeField] private float _dashingTime = 0.3f;
-    private float _dashingCooldown = 1f;
+    //private float _dashingCooldown = 1f;
     [SerializeField] TrailRenderer _dashTrail;
 
     [Header("Jumping")]
@@ -48,6 +48,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (canDash && Input.GetKey(KeyCode.Space))
+            StartCoroutine(Dash());
+        RaycastHit2D groundedRaycast = Physics2D.Raycast(transform.position, -Vector2.up, groundedDist);//grounded raycast to detect if on the ground
+        isGrounded = groundedRaycast.collider != null;
+        if (isGrounded) canDash = false;
         GroundJump();
         WallJump();
 
@@ -78,6 +83,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (((Input.GetButtonDown("Vertical") && Input.GetAxisRaw("Vertical") > 0) || Input.GetKeyDown(KeyCode.Space)) && _isGrounded && _canJump == true) //if vertical input, is grounded, and doesn't have jump cooldown
         {
+            canDash = true;
             StartCoroutine(JumpDelay());//Small cooldown for jump
             _rigidBody.velocity += Vector2.up * _jumpHeight;
             // camera.GetComponent<CameraShake>().cameraShake();
