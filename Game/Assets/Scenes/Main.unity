@@ -3154,7 +3154,7 @@ MonoBehaviour:
   _dashingCooldown: 1
   _dashTrail: {fileID: 1059072713}
   _jumpHeight: 10
-  _groundedDist: 0.7
+  _groundedDist: 1.26
   _maxVertSpeed: 10
   _wallJumpDist: 0.75
   _wallJumpDistSide: 15
