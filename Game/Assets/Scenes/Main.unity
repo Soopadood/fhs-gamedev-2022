@@ -2291,7 +2291,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 23.648315, y: -11.609802}
+  m_AnchoredPosition: {x: 23.648315, y: -11.609863}
   m_SizeDelta: {x: 123.41138, y: 109.24402}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &806570363
@@ -3133,8 +3133,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.073319554, y: -0.045508623}
-  m_Size: {x: 1.0366392, y: 1.3710172}
+  m_Offset: {x: 0.073319554, y: -0.08134234}
+  m_Size: {x: 1.0366392, y: 1.2540791}
   m_Direction: 0
 --- !u!114 &1210756877
 MonoBehaviour:
@@ -3151,6 +3151,7 @@ MonoBehaviour:
   _runSpeed: 7
   _dashPowerMultiplier: 1
   _dashingTime: 0.3
+  _dashingCooldown: 1
   _dashTrail: {fileID: 1059072713}
   _jumpHeight: 10
   _groundedDist: 0.7

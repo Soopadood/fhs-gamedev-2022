@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Jumping")]
     [SerializeField] private float _jumpHeight = 5;
-    [SerializeField] private float _groundedDist = 1;
+    [SerializeField] private float _groundedDist = 1.26f;
     [SerializeField] private float _maxVertSpeed = 20;
     private bool _canJump = true;
     private bool _isGrounded = false;
@@ -48,11 +48,12 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (_isGrounded) _canDash = false;
         if (_canDash && Input.GetKey(KeyCode.Space))
             StartCoroutine(Dash());
         RaycastHit2D groundedRaycast = Physics2D.Raycast(transform.position, -Vector2.up, _groundedDist);//grounded raycast to detect if on the ground
         _isGrounded = groundedRaycast.collider != null;
-        if (_isGrounded) _canDash = false;
+        
         GroundJump();
         WallJump();
 
@@ -80,9 +81,11 @@ public class PlayerMovement : MonoBehaviour
     {
         RaycastHit2D groundedRaycast = Physics2D.Raycast(transform.position, -Vector2.up, _groundedDist);//grounded raycast to detect if on the ground
         _isGrounded = groundedRaycast.collider != null;
+        Debug.Log("urmom");
 
-        if (((Input.GetButtonDown("Vertical") && Input.GetAxisRaw("Vertical") > 0) || Input.GetKeyDown(KeyCode.Space)) && _isGrounded && _canJump == true) //if vertical input, is grounded, and doesn't have jump cooldown
+        if (((Input.GetButtonDown("Vertical") && Input.GetAxisRaw("Vertical") > 0) || Input.GetKeyDown(KeyCode.Space)) && _isGrounded && _canJump == true) //if vertical input, is grounded, and doesn't have jump cooldown 
         {
+            Debug.Log("mymom");
             _canDash = true;
             StartCoroutine(JumpDelay());//Small cooldown for jump
             _rigidBody.velocity += Vector2.up * _jumpHeight;
