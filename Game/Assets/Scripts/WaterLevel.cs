@@ -19,6 +19,7 @@ public class WaterLevel : MonoBehaviour
     
     private float _maxWaterAmount;
     private bool _isInLake = false;
+ 
 
     private void Start()
     {
@@ -27,25 +28,31 @@ public class WaterLevel : MonoBehaviour
 
     private void Update()
     {
-        Mathf.Clamp(_waterAmount, 0, 100); //0 is the min, right?
-        if (_waterAmount >= 0)
+        
+        if (_waterAmount >= 0 && !_isInLake)
             _waterAmount -= _dryingRate * Time.deltaTime; //Decrease water level by drying rate
         _healthBarSlider.value = _waterAmount / _maxWaterAmount;
 
         var dropletSpriteIndex = Mathf.Clamp(_dropletSprites.Count - (int)(_waterAmount / _maxWaterAmount * _dropletSprites.Count) - 1, 0, _dropletSprites.Count - 1);
         _indicatorUi.sprite = _dropletSprites[dropletSpriteIndex];
 
-        if (_isInLake)
+        if (_isInLake && WaterAmount < _maxWaterAmount)
+        {
             _waterAmount += Time.deltaTime * 30f;
+            if (_waterAmount > _maxWaterAmount) _waterAmount = _maxWaterAmount;
+        }
+
+
 
         _spriteRenderer.SetActive(!(_isInvincible && _spriteRenderer.activeSelf));
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponentInParent<WaterDroplet>() != null) //Check if the collider's parent has WaterDroplet script(droplet detection)
+        if (collision.GetComponentInParent<WaterDroplet>() != null && _waterAmount < _maxWaterAmount) //Check if the collider's parent has WaterDroplet script(droplet detection)
         {
             WaterDroplet dropletScript = collision.GetComponentInParent<WaterDroplet>();
             _waterAmount += dropletScript.fillAmount;//increse water level by droplet's fillamount
+            if (_waterAmount > _maxWaterAmount) _waterAmount = _maxWaterAmount;
             collision.gameObject.SetActive(false); //set just FX and collider of droplet inactive(not parent w/ script_
         }
         if (collision.GetComponent<Lake>() != null)
