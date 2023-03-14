@@ -3149,17 +3149,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbb6bbc9055fbc44f851f53a2f6ccc7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _runSpeed: 7
-  _dashPowerMultiplier: 1
-  _dashingTime: 0.3
-  _dashingCooldown: 1
-  _dashTrail: {fileID: 1059072713}
-  _jumpHeight: 10
-  _groundedDist: 1.26
-  _maxVertSpeed: 10
-  _wallJumpDist: 0.75
-  _wallJumpDistSide: 15
-  _ground:
+  runSpeed: 7
+  dashPowerMultiplier: 1
+  dashingTime: 0.3
+  dashTrail: {fileID: 1059072713}
+  jumpHeight: 10
+  groundedDist: 0.75
+  maxVertSpeed: 10
+  landingDust: {fileID: 6105315001734519530, guid: cde879f667076e34396525d027fd03dd, type: 3}
+  wallJumpDist: 0.75
+  wallJumpDistSide: 15
+  ground:
     serializedVersion: 2
     m_Bits: 64
   _camera: {fileID: 519420032}
