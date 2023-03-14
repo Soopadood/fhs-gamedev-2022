@@ -38,6 +38,17 @@ public class ApplyLevelSkin : MonoBehaviour
 
     }
 
+    //CURRENTLY WORKING ON THIS - WILL OLSON
+
+    void SkinTheLevels(GameObject _skinObject, string _parentName, int _sortingOrderFactor) // _sortingOrderFactor just decides which layer
+                                                                                            // this is in, range of 1-31. multiplied by 1k.
+                                                                                            // We are capped at 1k of each type of block in
+                                                                                            // a level and 31 different types of blocks in a
+                                                                                            // level due to the sorting layer cap of 2^15 - 1
+    {
+
+    }
+
     // Update is called once per frame
     void Update()
     {
