@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5911d50a18c39e44895bb06af4f87839
+guid: 43f0febc31447c24c9fcebed6eede2ee
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 200
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -103,9 +103,9 @@ TextureImporter:
   - serializedVersion: 3
     buildTarget: WebGL
     maxTextureSize: 2048
-    resizeAlgorithm: 1
+    resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -115,9 +115,9 @@ TextureImporter:
   - serializedVersion: 3
     buildTarget: Windows Store Apps
     maxTextureSize: 2048
-    resizeAlgorithm: 1
+    resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -128,85 +128,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bop2_0
+      name: walking_0
       rect:
         serializedVersion: 2
-        x: 18
-        y: 214
-        width: 26
-        height: 25
+        x: 0
+        y: 0
+        width: 56
+        height: 62
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 54597cea9f5177f42b8fea0985564fc7
-      internalID: 1082126202
+      spriteID: 6e5c113937bc47c48abfcbf8a3e91fd7
+      internalID: 771201895
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bop2_1
+      name: walking_1
       rect:
         serializedVersion: 2
-        x: 17
-        y: 150
-        width: 28
-        height: 24
+        x: 68
+        y: 0
+        width: 52
+        height: 62
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f3bf6e93e0438c84280cafccec7b748e
-      internalID: 791769745
+      spriteID: 0c868919d6d7d8b4d8543e65a9529e86
+      internalID: 419470702
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bop2_2
+      name: walking_2
       rect:
         serializedVersion: 2
-        x: 17
-        y: 86
-        width: 28
-        height: 23
+        x: 132
+        y: 0
+        width: 56
+        height: 62
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5164795a27e11934898af984398ecbd8
-      internalID: 1934124544
+      spriteID: 477f64c38c84b1640ba1a5ae668b6852
+      internalID: -2011534982
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bop2_3
+      name: walking_3
       rect:
         serializedVersion: 2
-        x: 17
-        y: 22
-        width: 28
-        height: 24
+        x: 196
+        y: 0
+        width: 56
+        height: 62
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8bc026a9fad336846b3b23c4b5ab1673
-      internalID: 742661954
+      spriteID: 643fe976a8300014da5fec1d33acb468
+      internalID: 1183141494
       vertices: []
       indices: 
       edges: []
@@ -222,10 +222,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      bop2_1: 791769745
-      bop2_3: 742661954
-      bop2_0: 1082126202
-      bop2_2: 1934124544
+      walking_2: -2011534982
+      walking_1: 419470702
+      walking_3: 1183141494
+      walking_0: 771201895
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

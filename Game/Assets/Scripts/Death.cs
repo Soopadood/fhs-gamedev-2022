@@ -10,27 +10,28 @@ public class Death : MonoBehaviour
     [SerializeField] GameObject DeathScreen;
     [SerializeField] TextMeshProUGUI DeathTextUI;
     [SerializeField] string[] DeathTextList;
-    // Start is called before the first frame update
+    public GameObject checkpoint;
+
     void Start()
     {
         waterLevel = GetComponent<WaterLevel>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-       if (waterLevel.waterAmount <= 0)
+       if (waterLevel.WaterAmount <= 0)
         {
             DeathScreen.SetActive(true);
             Time.timeScale = 0;
         }
         if (Input.GetKeyDown(KeyCode.E) && DeathScreen.activeSelf)
         {
-            transform.position = new Vector2(0, 0);
+            transform.position = checkpoint.transform.position;
             DeathScreen.SetActive(false);
             DeathTextUI.text = DeathTextList[ Random.Range(0, DeathTextList.Length)];
             Time.timeScale = 1;
-            waterLevel.waterAmount = 100;
+            waterLevel.WaterAmount = 100;
+            waterLevel.IsInvincible = false;
         }
     }
 }
