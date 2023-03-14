@@ -48,7 +48,11 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
+<<<<<<< Updated upstream
   controlID: 20
+=======
+  controlID: 92
+>>>>>>> Stashed changes
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -223,7 +227,11 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
+<<<<<<< Updated upstream
   controlID: 21
+=======
+  controlID: 93
+>>>>>>> Stashed changes
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -248,7 +256,11 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
+<<<<<<< Updated upstream
   controlID: 22
+=======
+  controlID: 94
+>>>>>>> Stashed changes
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -345,8 +357,12 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SkipHidden: 0
     m_SearchArea: 1
+<<<<<<< Updated upstream
     m_Folders:
     - Assets/Scripts
+=======
+    m_Folders: []
+>>>>>>> Stashed changes
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
@@ -517,9 +533,15 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
+<<<<<<< Updated upstream
       m_SelectedIDs: 36600000
       m_LastClickedID: 24630
       m_ExpandedIDs: 2afbffff58600000
+=======
+      m_SelectedIDs: 00610000
+      m_LastClickedID: 0
+      m_ExpandedIDs: 2cfbffffd65f0000e65f0000f85f0000126000003c60000048600000ca600000
+>>>>>>> Stashed changes
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -790,9 +812,15 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
+<<<<<<< Updated upstream
     m_Target: {x: 1.0651609, y: -0.53488, z: 0.184275}
     speed: 2
     m_Value: {x: 1.0651609, y: -0.53488, z: 0.184275}
+=======
+    m_Target: {x: -0.08905485, y: 1.186971, z: -0.0661323}
+    speed: 2
+    m_Value: {x: -0.08905485, y: 1.186971, z: -0.0661323}
+>>>>>>> Stashed changes
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -843,9 +871,15 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
+<<<<<<< Updated upstream
     m_Target: 1.2724105
     speed: 2
     m_Value: 1.2724105
+=======
+    m_Target: 8.886479
+    speed: 2
+    m_Value: 8.886479
+>>>>>>> Stashed changes
   m_Ortho:
     m_Target: 1
     speed: 2
